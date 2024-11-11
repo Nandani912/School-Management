@@ -1,0 +1,68 @@
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; 
+    margin: 0;
+    padding: 20px;
+}
+
+.course-container {
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px;
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #343a40; 
+    margin-bottom: 20px;
+    text-align: center; 
+}
+
+.course-description {
+    margin-bottom: 30px;
+    color: #555;
+    line-height: 1.6; 
+}
+
+
+.button-container {
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+}
+
+button, a {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; 
+    transition: background-color 0.3s;
+}
+
+button:hover, a:hover {
+    background-color: #0056b3; 
+}
+</style>
+
+<body>
+<div class="course-container">
+    <h1><%= @course.title %></h1>
+    <p class="course-description"><%= @course.description %></p>
+
+    <div class="button-container">
+        <%= button_to "Home", courses_path, method: :get %>
+
+        <% if user_signed_in? && current_user.teacher? %>
+            <%= link_to "Edit", edit_course_path(@course), class: "button" %>
+            <%= button_to "Destroy", course_path(@course), method: :delete, data: { confirm: "Are you sure?" }, class: "button" %>
+        <% end %>
+    </div>
+</div>
+</body>
+
